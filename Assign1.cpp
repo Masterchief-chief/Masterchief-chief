@@ -47,7 +47,7 @@ int main(void) {
 		} break;
 		case AF_INET6: {
 
-			//Orrible cast which is legal even if ugly
+			
 			auto addr = (struct sockaddr_in6*)res->ai_addr;
 
 			if (NULL == inet_ntop(res->ai_family,
