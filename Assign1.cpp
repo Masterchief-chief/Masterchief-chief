@@ -18,7 +18,7 @@ int main(void) {
 	hints.ai_protocol = 6; /* TCP See /etc/protocols */
 
 	// resolve the domain name into a list of addresses
-	auto error = getaddrinfo("google.com", NULL, &hints, &result);
+	auto error = getaddrinfo("www.google.com", NULL, &hints, &result);
 	if (error != 0) {
 		if (error == EAI_SYSTEM) {
 			perror("getaddrinfo");
