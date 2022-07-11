@@ -1,12 +1,14 @@
+# Names in S3 need to be globally unique
+# Create an S3 bucket resource
 resource "aws_s3_bucket" "my-new-S3-bucket" {
-  bucket = "my-new-tf-test-bucket-bryan"
+  bucket = "my-new-tf-test-bucket-bryan"      # name of bucket in AWS (unique)
   tags = {
-    Name = "My S3 Bucket"
+    Name = "My S3-solo Bucket"
     Purpose = "Intro to Resource Blocks Lab"
   }
 }
-
+# Access control list for S3 bucket
 resource "aws_s3_bucket_acl" "my_new_bucket_acl" {
-  bucket = aws_s3_bucket.my-new-S3-bucket.id
-  acl = "private"
+  bucket = aws_s3_bucket.my-new-S3-bucket.id   # referencing the bucket in line 3
+  acl = "private"                              # setting the access to the bucket
 }
