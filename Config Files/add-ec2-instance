@@ -1,0 +1,5 @@
+# AWS EC2 Example
+8 resource "aws_instance" "web_server" { # BLOCK
+9   ami = "ami-04d29b6f966df1537" # Argument
+10  instance_type = var.instance_type # Argument with value as expression (Variable value r)
+11 }
