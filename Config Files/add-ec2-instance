@@ -1,5 +1,9 @@
-# AWS EC2 Example
-8 resource "aws_instance" "web_server" { # BLOCK
-9   ami = "ami-04d29b6f966df1537" # Argument
-10  instance_type = var.instance_type # Argument with value as expression (Variable value r)
-11 }
+# Terraform Resource Block - To Build EC2 instance in Public Subnet
+resource "aws_instance" "web_server" {
+ami = data.aws_ami.ubuntu.id
+instance_type = "t2.micro"
+subnet_id = aws_subnet.public_subnets["public_subnet_1"].id
+tags = {
+Name = "Ubuntu EC2 Server"
+}
+}
