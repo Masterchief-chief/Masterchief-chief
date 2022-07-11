@@ -1,20 +1,22 @@
-# Configure the AWS Provider
+# AWS Provider block
 provider "aws" {
-region = "us-east-1"
+region = "us-east-2"
 }
 #Retrieve the list of AZs in the current AWS region
 data "aws_availability_zones" "available" {}
 data "aws_region" "current" {}
-#Define the VPC
+
+# Resource block - VPC
 resource "aws_vpc" "vpc" {
 cidr_block = var.vpc_cidr
 tags = {
 Name = var.vpc_name
-Environment = "demo_environment"
+Environment = "test_environment"
 Terraform = "true"
 }
 }
-#Deploy the private subnets
+
+# Resource block - private subnets
 resource "aws_subnet" "private_subnets" {
 for_each = var.private_subnets
 vpc_id = aws_vpc.vpc.id
@@ -26,7 +28,8 @@ Name = each.key
 Terraform = "true"
 }
 }
-#Deploy the public subnets
+
+# Respource block - public subnets
 resource "aws_subnet" "public_subnets" {
 for_each = var.public_subnets
 vpc_id = aws_vpc.vpc.id
@@ -39,6 +42,7 @@ Name = each.key
 Terraform = "true"
 }
 }
+
 #Create route tables for public and private subnets
 resource "aws_route_table" "public_route_table" {
 vpc_id = aws_vpc.vpc.id
@@ -48,7 +52,7 @@ gateway_id = aws_internet_gateway.internet_gateway.id
 #nat_gateway_id = aws_nat_gateway.nat_gateway.id
 }
 tags = {
-Name = "demo_public_rtb"
+Name = "test_public_rtb"
 Terraform = "true"
 }
 }
@@ -60,10 +64,11 @@ cidr_block = "0.0.0.0/0"
 nat_gateway_id = aws_nat_gateway.nat_gateway.id
 }
 tags = {
-Name = "demo_private_rtb"
+Name = "test_private_rtb"
 Terraform = "true"
 }
 }
+
 #Create route table associations
 resource "aws_route_table_association" "public" {
 depends_on = [aws_subnet.public_subnets]
@@ -77,27 +82,30 @@ route_table_id = aws_route_table.private_route_table.id
 for_each = aws_subnet.private_subnets
 subnet_id = each.value.id
 }
+
 #Create Internet Gateway
 resource "aws_internet_gateway" "internet_gateway" {
 vpc_id = aws_vpc.vpc.id
 tags = {
-Name = "demo_igw"
+Name = "test_igw"
 }
 }
-#Create EIP for NAT Gateway
+
+# Create EIP for NAT Gateway
 resource "aws_eip" "nat_gateway_eip" {
 vpc = true
 depends_on = [aws_internet_gateway.internet_gateway]
 tags = {
-Name = "demo_igw_eip"
+Name = "test_igw_eip"
 }
 }
+
 #Create NAT Gateway
 resource "aws_nat_gateway" "nat_gateway" {
 depends_on = [aws_subnet.public_subnets]
 allocation_id = aws_eip.nat_gateway_eip.id
 subnet_id = aws_subnet.public_subnets["public_subnet_1"].id
 tags = {
-Name = "demo_nat_gateway"
+Name = "test_nat_gateway"
 }
 }
