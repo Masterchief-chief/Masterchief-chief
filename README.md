@@ -15,3 +15,8 @@ You can install the Terraform package from the command line on a Windows machine
 3. Type choco or choco-? and if you don't see any errors you successfully installed Chocolatey! 
 
 ## Installing Terraform
+In the same shell or in a new shell, run the following command to install Terrafrom using the Chocolately package manager.
+
+1. Run ``` choco install terraform ``` in the shell and allow installation
+2. Verify installation by typing the command ```terraform -help```.
+3. Congrats! If the installation is error free, you now have successfully installed Terraform locally on your Windows machine.
