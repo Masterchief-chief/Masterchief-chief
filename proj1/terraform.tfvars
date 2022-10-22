@@ -1,10 +1,10 @@
-vpc_name = [Name of VPC]
-vpc_cidr_block = [CIDR for VPC]
+vpc_name = "solovpc1"
+vpc_cidr_block = "10.10.0.0/16"
 vpc_id = "0"
-pub_cidr_block = [CIDR for public subnet]
-availability_zone = ["us-east-1a", "us-east-1b","us-east-1c"]
-pvt_cidr_block1 = [CIDR private subnet 1]
-pvt_cidr_block2 = [CIDR private subnet 2]
+pub_cidr_block = "10.10.0.0/24"
+availability_zone = ["us-east-2a", "us-east-2b","us-east-2c"]
+pvt_cidr_block1 = "10.10.2.0/24"
+pvt_cidr_block2 = "10.10.3.0/24"
 ami = [Instance AMI ID fro eg:"ami-02354e95b39ca8dec"]
 instance_type = [Instance Type for eg:"t3.micro"]
 instance_name = [Name of Instance]
