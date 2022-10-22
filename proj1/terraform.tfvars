@@ -1,0 +1,13 @@
+vpc_name = [Name of VPC]
+vpc_cidr_block = [CIDR for VPC]
+vpc_id = "0"
+pub_cidr_block = [CIDR for public subnet]
+availability_zone = ["us-east-1a", "us-east-1b","us-east-1c"]
+pvt_cidr_block1 = [CIDR private subnet 1]
+pvt_cidr_block2 = [CIDR private subnet 2]
+ami = [Instance AMI ID fro eg:"ami-02354e95b39ca8dec"]
+instance_type = [Instance Type for eg:"t3.micro"]
+instance_name = [Name of Instance]
+subnet_group_name = [Name of Security Group]
+associate_public_ip_address = [true, false]
+userdata = ""
